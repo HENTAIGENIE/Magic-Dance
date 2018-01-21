@@ -2,8 +2,9 @@
 
 public class Layout {
 
-    //Vars
-
+    public Layout(){
+        //vars
+    }
     public void drawLayout() {
 
     }

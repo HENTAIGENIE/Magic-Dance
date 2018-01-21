@@ -5,7 +5,7 @@ public class GameMode {
     // FUN!-ction Area
     public void shuffleDeck(Player player) {
 
-        int size = player.deck.length;
+        int size = player.getDeck().length; //<-- Changed to use getter
 
         // Make an int array of 'size' items, then make sure each item equals 0
         int[] poop = new int[size];
@@ -30,7 +30,7 @@ public class GameMode {
                     count--;
                 }
                 if (count == 0) {
-                    poop[i] = player.deck[I];
+                    poop[i] = player.getDeck()[I]; //<-- Changed to use a getter
                 }
                 i++;
             }
