@@ -1,6 +1,8 @@
 
 
-public class MagicLayout {
+public class Layout {
+
+    //Vars
 
     public void drawLayout() {
 
