@@ -2,40 +2,47 @@ import java.util.Random;
 
 public class GameMode {
 
-    // FUN!-ction Area
-    public void shuffleDeck(Player player) {
+    // Draw Cards Method
+    public void drawCards(Player player, int numOfCards) {
 
-        int size = player.getDeck().length; //<-- Changed to use getter
+        Random rand = new Random();
+        int size = player.getDeck().length;
+        int firstIndexToAdd = player.getHand().length;
+        int randomNum;
 
-        // Make an int array of 'size' items, then make sure each item equals 0
-        int[] poop = new int[size];
-        for (int i = 0; i < size; i++) {
-            poop[i] = 0;
+        for (int i=firstIndexToAdd;i<firstIndexToAdd+numOfCards;i++){
+            randomNum = rand.nextInt(size);
+            player.setHand(i, player.getDeckElement(randomNum));
+            deleteAndCollapseArray(player.getDeck(), randomNum);
+            size--;
         }
 
-        /* loop through deck starting at item 0 going up to item size - 1, using counter 'I'.
-           choose a random number in the interval [1, 'size' - 'I'], 'I' being the counter for the loop above
-           within this loop, loop through the poop array, until the 'rNum' zero items have been counted, then set the last counted
-           one equal to player.deck[I]
-        */
+    }
 
-        int count;                                                  // variable used to count the number of poop items equal to zero
-        Random rand = new Random();                                 // Random type to create the random number
+    // Function to delete an element and then collapse the array | idk any other way to resize an array
+    // than creating a new array with a different size and putting it in that | this won't matter if we do switch from
+    // arrays to something else
+    public void deleteAndCollapseArray(int[] array, int index) {
 
-        for (int I = 0; I < size; I++) {
-            count = rand.nextInt(size - I) + 1;
-            int i = 0;                                              // variable used to loop through poop
-            while (count > 0) {
-                if (poop[i] > 0) {
-                    count--;
-                }
-                if (count == 0) {
-                    poop[i] = player.getDeck()[I]; //<-- Changed to use a getter
-                }
-                i++;
-            }
+        // create the temporary array and set the proper element to zero
+        int size = array.length;
+        int[] tempCopy = array;
+        int [] transferCopy = new int[size - 1];
+        tempCopy[index] = 0;
+
+        // copy every element but the one deleted over to the temp array
+        for (int i=0;i<size-1;i++) {
+            if (tempCopy[i] > 0)
+                transferCopy[i] = tempCopy[i];
         }
-    } // end of randomizeDeck()
+
+        // resize the original deck, then move the contents back in it
+        array = new int[size - 1];
+        for (int i=0;i<size-1;i++){
+            array[i] = transferCopy[i];
+        }
+
+    }
 
     // Instantiate the players
     public Player Robot = new Player() {
@@ -46,7 +53,6 @@ public class GameMode {
 
     };
 
-    // Beginning Phase - Part 1: Choose your decks - Might be Part 2 depending on loop stuff needed for UI, idk
-
+    // Beginning Phase
 
 }
