@@ -1,22 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 
 public class UserInterface {
 
     private int frameHeight;
     private int frameWidth;
 
-    JFrame mainMenu = new JFrame("Magic Dance");
-    JFrame inGameUI = new JFrame("Game");
+    JFrame magicInterface = new JFrame("Magic Dance");
 
     public UserInterface(){
 
         //Default values
         frameHeight = 256;
-        frameWidth = 256;
+        frameWidth = 512;
 
         //Initialization function calls
         setUpInterface();
@@ -25,36 +21,31 @@ public class UserInterface {
 
     private void setUpInterface(){
         populateMainMenu();
-        initializeMainMenu();
+        initializeFrame();
     }
 
-    private void initializeMainMenu(){
-        mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainMenu.setLocationRelativeTo(null);
-        mainMenu.setVisible(true);
-        mainMenu.setSize(frameWidth, frameHeight);
+    private void initializeFrame(){
+        magicInterface.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        magicInterface.setSize(frameWidth, frameHeight);
+        magicInterface.setLocationRelativeTo(null);
+        magicInterface.setVisible(true);
     }
 
     private void populateMainMenu(){
         setupPlayButton();
+        //Layout here
     }
 
     private void setupPlayButton(){
         JButton playButton = new JButton("PLAY");
-        playButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                initializeInGameUI();
-                mainMenu.setVisible(false);
-            }
+        playButton.addActionListener(e -> {
+            changeToGameScreen();
         });
-        mainMenu.add(playButton, BorderLayout.PAGE_END);
+        magicInterface.add(playButton, BorderLayout.PAGE_END); // Most likely will move to another function encapsulating the entire UI layout
     }
 
-    private void initializeInGameUI(){
-        inGameUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        inGameUI.setLocationRelativeTo(null);
-        inGameUI.setVisible(true);
-        inGameUI.setSize(frameWidth, frameHeight);
+    private void changeToGameScreen(){
+
     }
 
 }
