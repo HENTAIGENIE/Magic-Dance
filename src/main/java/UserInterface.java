@@ -6,7 +6,7 @@ public class UserInterface {
     private int frameHeight;
     private int frameWidth;
 
-    JFrame magicInterface = new JFrame("Magic Dance");
+
 
     public UserInterface(){
 
@@ -20,32 +20,13 @@ public class UserInterface {
     }
 
     private void setUpInterface(){
-        populateMainMenu();
-        initializeFrame();
-    }
-
-    private void initializeFrame(){
-        magicInterface.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        magicInterface.setSize(frameWidth, frameHeight);
-        magicInterface.setLocationRelativeTo(null);
-        magicInterface.setVisible(true);
-    }
-
-    private void populateMainMenu(){
-        setupPlayButton();
-        //Layout here
-    }
-
-    private void setupPlayButton(){
-        JButton playButton = new JButton("PLAY");
-        playButton.addActionListener(e -> {
-            changeToGameScreen();
+        SwingUtilities.invokeLater(() -> {
+            JFrame mainFrame = new MagicFrame("Magic Dance");
+            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainFrame.setSize(frameWidth, frameHeight);
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setVisible(true);
         });
-        magicInterface.add(playButton, BorderLayout.PAGE_END); // Most likely will move to another function encapsulating the entire UI layout
-    }
-
-    private void changeToGameScreen(){
-
     }
 
 }
