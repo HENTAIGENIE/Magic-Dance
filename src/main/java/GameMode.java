@@ -10,7 +10,7 @@ public class GameMode {
         int firstIndexToAdd = player.getHand().length;
         int randomNum;
 
-        for (int i=firstIndexToAdd;i<firstIndexToAdd+numOfCards;i++){
+        for (int i = firstIndexToAdd; i < firstIndexToAdd + numOfCards; i++){
             randomNum = rand.nextInt(size);
             player.setHand(i, player.getDeckElement(randomNum));
             deleteAndCollapseArray(player.getDeck(), randomNum);
@@ -31,14 +31,14 @@ public class GameMode {
         tempCopy[index] = 0;
 
         // copy every element but the one deleted over to the temp array
-        for (int i=0;i<size-1;i++) {
+        for (int i = 0; i < size - 1 ; i++) {
             if (tempCopy[i] > 0)
                 transferCopy[i] = tempCopy[i];
         }
 
         // resize the original deck, then move the contents back in it
         array = new int[size - 1];
-        for (int i=0;i<size-1;i++){
+        for (int i = 0; i < size - 1; i++){
             array[i] = transferCopy[i];
         }
 
