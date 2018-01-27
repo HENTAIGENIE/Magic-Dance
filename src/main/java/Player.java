@@ -26,4 +26,7 @@ public class Player {
     public void setGrave(int index, int newElement){ grave[index] = newElement; }
 
     // The Actions
+    public void tap (Card card) {
+
+    }
 }
