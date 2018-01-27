@@ -5,16 +5,17 @@ public class GameMode {
     // Draw Cards Method
     public void drawCards(Player player, int numOfCards) {
 
+        // declare variables
         Random rand = new Random();
         int size = player.getDeck().length;
-        int firstIndexToAdd = player.getHand().length;
+        int firstIndexToAdd = player.getHand().length;              // hand will only ever be long enough to hold its cards, so the first index to add these new cards will be 1 + the size of the current hand
         int randomNum;
 
-        for (int i = firstIndexToAdd; i < firstIndexToAdd + numOfCards; i++){
-            randomNum = rand.nextInt(size);
-            player.setHand(i, player.getDeckElement(randomNum));
-            deleteAndCollapseArray(player.getDeck(), randomNum);
-            size--;
+        for (int i = firstIndexToAdd; i < firstIndexToAdd + numOfCards; i++) { // repeat numOfCards times
+            randomNum = rand.nextInt(size);                         // create random number from 0 to the size of the deck
+            player.setHand(i, player.getDeckElement(randomNum));    // push this card to the hand array
+            removeArrayElement(player.getDeck(), randomNum);        // delete the vacant space in the deck
+            size--;                                                 // reduce the size variable for the next loop so that randomNum is an appropriate number
         }
 
     }
@@ -22,29 +23,23 @@ public class GameMode {
     // Function to delete an element and then collapse the array | idk any other way to resize an array
     // than creating a new array with a different size and putting it in that | this won't matter if we do switch from
     // arrays to something else
-    public void deleteAndCollapseArray(int[] array, int index) {
+    public void removeArrayElement(int[] array, int index) {
 
         // create the temporary array and set the proper element to zero
         int size = array.length;
         int[] tempCopy = array;
-        int [] transferCopy = new int[size - 1];
         tempCopy[index] = 0;
 
-        // copy every element but the one deleted over to the temp array
-        for (int i = 0; i < size - 1 ; i++) {
-            if (tempCopy[i] > 0)
-                transferCopy[i] = tempCopy[i];
-        }
+        // resize array and delete proper element by moving all elements back into the original only if the element is > 0
+        array = new int[size - 1];                                  // resize
 
-        // resize the original deck, then move the contents back in it
-        array = new int[size - 1];
-        for (int i = 0; i < size - 1; i++){
-            array[i] = transferCopy[i];
+        for ( int i = 0; i < size - 1; i++ ) {                      // move elements back if > 0
+            if (tempCopy[i] > 0) {
+                array[i] = tempCopy[i];
+            }
         }
 
     }
-
-    //
 
     // Instantiate the players
     public Player Robot = new Player() {
