@@ -9,15 +9,11 @@ public class Player {
     private int[] grave = new int[60];
 
     //Getters
-    public int getLife(){
-        return life;
-    }
+    public int getLife(){ return life; }
     public int[] getDeck() { return Arrays.copyOf(deck, deck.length); }
     public int getDeckElement(int index) { return deck[index]; }
     public int[] getHand(){ return Arrays.copyOf(hand, hand.length); }
-    public int[] getGrave(){
-        return Arrays.copyOf(grave, grave.length);
-    }
+    public int[] getGrave(){ return Arrays.copyOf(grave, grave.length); }
 
     //Setters
     public void setLife(int newLife) { life = newLife; }
