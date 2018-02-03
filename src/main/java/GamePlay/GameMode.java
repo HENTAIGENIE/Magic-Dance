@@ -1,3 +1,5 @@
+package GamePlay;
+
 import java.util.Random;
 
 public class GameMode {
