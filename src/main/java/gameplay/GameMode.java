@@ -1,10 +1,10 @@
-package GamePlay;
+package gameplay;
 
 import java.util.Random;
 
 public class GameMode {
 
-    // Draw Cards Method
+    // Draw card Method
     public void drawCards(Player player, int numOfCards) {
 
         // declare variables

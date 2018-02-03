@@ -1,4 +1,4 @@
-package GamePlay;
+package gameplay;
 
 import java.util.Arrays;
 
@@ -24,8 +24,8 @@ public class Player {
     public void setGrave(int index, int newElement){ grave[index] = newElement; }
 
     // The Actions
-    /* Altered GamePlay.Card Class, working on interface
-    public void tap (GamePlay.Card card) {
+    /* Altered gameplay.card.Card Class, working on interface
+    public void tap (gameplay.card.Card card) {
 
     }
     */

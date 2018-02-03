@@ -1,8 +1,7 @@
 
 import java.lang.Exception;
 
-import GamePlay.Ability;
-import UI.PrimaryView;
+import userInterface.PrimaryView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

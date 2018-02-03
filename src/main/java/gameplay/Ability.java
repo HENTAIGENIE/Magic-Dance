@@ -1,4 +1,4 @@
-package GamePlay;
+package gameplay;
 
 public class Ability {
     public enum Keyword {

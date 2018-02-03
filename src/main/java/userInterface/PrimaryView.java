@@ -1,4 +1,4 @@
-package UI;
+package userInterface;
 
 import javafx.scene.layout.BorderPane;
 
