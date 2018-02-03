@@ -4,11 +4,14 @@ import java.util.Random;
 
 public class GameMode {
 
-    // Draw card Method
+    public GameMode(){
+
+    }
+
     public void drawCards(Player player, int numOfCards) {
 
-        // declare variables
         Random rand = new Random();
+
         int size = player.getDeck().length;
         int firstIndexToAdd = player.getHand().length;              // hand will only ever be long enough to hold its cards, so the first index to add these new cards will be 1 + the size of the current hand
         int randomNum;
