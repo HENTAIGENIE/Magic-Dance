@@ -61,11 +61,21 @@ public class ManaCount {
         this.colorlessManaCount = colorlessManaCount;
     }
 
-
+    // Constructors
 
     public ManaCount(){
 
     }
+
+    /**
+     *
+     * @param red number of red mana
+     * @param white number of white mana
+     * @param blue number of blue mana
+     * @param green number of green mana
+     * @param black number of black mana
+     * @param colorless number of colorless mana
+     */
 
     public ManaCount(int red, int white, int blue, int green, int black, int colorless){
         redManaCount = red;
@@ -75,6 +85,8 @@ public class ManaCount {
         blackManaCount = black;
         colorlessManaCount = colorless;
     }
+
+    // Public interface
 
     public boolean canAfford(ManaCount manaCost){
         //1. Check if there are enough of the mana that are explicitly required in manaCost
@@ -92,5 +104,7 @@ public class ManaCount {
             //Throw error or something - cant afford
         }
     }
+
+    // Implementation
 
 }

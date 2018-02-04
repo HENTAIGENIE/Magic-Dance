@@ -55,6 +55,9 @@ public class GameMode {
 
     };
 
-    // Beginning Phase
+    public void testMethod(){
+
+    }
+
 
 }

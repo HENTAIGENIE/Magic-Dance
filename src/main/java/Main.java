@@ -1,13 +1,8 @@
+import gameplay.spells.Batterhorn;
 
-import java.lang.Exception;
+public class Main /*extends Application*/{
 
-import userInterface.PrimaryView;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-public class Main extends Application{
-
+    /*
     public static String IMAGES = "/img/";
     public static String FXML = "/fxml/";
 
@@ -36,9 +31,9 @@ public class Main extends Application{
 
     }
 
+    */
     public static void main(String[] args){
-
-
-        Application.launch(args);
+        new Batterhorn().getCardImage();
+        //Application.launch(args);
     }
 }

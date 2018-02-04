@@ -5,14 +5,12 @@ import java.io.File;
 
 public interface Card {
 
-    String IMAGES = "/img/cards/";
-
-    void loadCardData(File data);
+    String IMAGES = "./src/main/resources/img/cards/";
 
     void onSummon();
-    void onTap();
     void onDestroy();
 
+    String getName();
     Image getCardImage();
     Object getManaCost();
 
