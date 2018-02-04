@@ -1,4 +1,4 @@
-package gameplay.spells;
+package gameplay.card.permanent.creature;
 
 import gameplay.ManaCount;
 import gameplay.card.permanent.creature.Creature;
@@ -8,15 +8,21 @@ import java.io.File;
 
 public class Batterhorn implements Creature {
 
+    //Public Interface
 
     @Override
     public int getPower() {
-        return 0;
+        return 4;
     }
 
     @Override
     public int getToughness() {
-        return 0;
+        return 3;
+    }
+
+    @Override
+    public Species getSpecies(){
+        return Species.BEAST;
     }
 
     @Override
@@ -36,18 +42,24 @@ public class Batterhorn implements Creature {
 
     @Override
     public String getName() {
-        return null;
+        return "Batterhorn";
     }
 
     @Override
     public Image getCardImage() {
-        System.out.println(new File(IMAGES + "batterhorn.jpeg").exists());
-        //return new Image("/img/cards/batterhorn.jpeg");
-        return null;
+        return new Image(IMAGES + "batterhorn.jpeg");
     }
 
     @Override
     public Object getManaCost() {
         return new ManaCount(1,0,0,0,0,4);
     }
+
+    @Override
+    public ManaColor getColor(){
+        return ManaColor.RED;
+    }
+
+    //Implementation
+
 }

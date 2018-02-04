@@ -1,32 +1,18 @@
 package gameplay;
 
+import gameplay.card.Card;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Player {
 
     // The Essentials
     private int life = 20;
-    private int[] deck = new int[60];
-    private int[] hand = new int[0];
-    private int[] grave = new int[60];
 
-    //Getters
-    public int getLife(){ return life; }
-    public int[] getDeck() { return Arrays.copyOf(deck, deck.length); }
-    public int getDeckElement(int index) { return deck[index]; }
-    public int[] getHand(){ return Arrays.copyOf(hand, hand.length); }
-    public int[] getGrave(){ return Arrays.copyOf(grave, grave.length); }
 
-    //Setters
-    public void setLife(int newLife) { life = newLife; }
-    public void setDeck(int index, int newElement){ deck[index] = newElement; }
-    public void setHand(int index, int newElement){ hand[index] = newElement; }
-    public void setGrave(int index, int newElement){ grave[index] = newElement; }
+    public void moveCard(int cardIndex, ArrayList<Card> move){
 
-    // The Actions
-    /* Altered gameplay.card.Card Class, working on interface
-    public void tap (gameplay.card.Card card) {
+    };
 
-    }
-    */
 }

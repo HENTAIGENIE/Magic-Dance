@@ -6,6 +6,14 @@ import java.io.File;
 public interface Card {
 
     String IMAGES = "./src/main/resources/img/cards/";
+    enum ManaColor {
+        RED,
+        WHITE,
+        BLUE,
+        GREEN,
+        BLACK,
+        COLORLESS
+    }
 
     void onSummon();
     void onDestroy();
@@ -13,5 +21,6 @@ public interface Card {
     String getName();
     Image getCardImage();
     Object getManaCost();
+    ManaColor getColor();
 
 }
