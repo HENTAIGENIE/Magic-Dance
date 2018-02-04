@@ -61,23 +61,33 @@ public class ManaCount {
         this.colorlessManaCount = colorlessManaCount;
     }
 
+    public void addRedMana(int mana){ this.redManaCount += mana; }
+
+    public void addWhiteMana(int mana){ this.whiteManaCount += mana; }
+
+    public void addBlueMana(int mana){ this.blueManaCount += mana; }
+
+    public void addGreenMana(int mana){ this.greenManaCount += mana; }
+
+    public void addBlackMana(int mana){ this.blueManaCount += mana; }
+
+    public void addColorlessMana(int mana){ this.colorlessManaCount += mana; }
+
     // Constructors
 
     public ManaCount(){
 
+        redManaCount = 0;
+        whiteManaCount = 0;
+        blueManaCount = 0;
+        greenManaCount = 0;
+        blackManaCount = 0;
+        colorlessManaCount = 0;
+
     }
 
-    /**
-     *
-     * @param red number of red mana
-     * @param white number of white mana
-     * @param blue number of blue mana
-     * @param green number of green mana
-     * @param black number of black mana
-     * @param colorless number of colorless mana
-     */
-
     public ManaCount(int red, int white, int blue, int green, int black, int colorless){
+
         redManaCount = red;
         whiteManaCount = white;
         blueManaCount = blue;
@@ -103,6 +113,34 @@ public class ManaCount {
         else {
             //Throw error or something - cant afford
         }
+    }
+
+
+    /**
+     * Makes a copy of a specified ManaCount object
+     * @param original ManaCount object to be copied
+     * @return returns a copy of the original ManaCount object
+     */
+    public ManaCount getCopyOf(ManaCount original){
+        ManaCount manaCountCopy = new ManaCount();
+
+        manaCountCopy.redManaCount = original.getRedManaCount();
+        manaCountCopy.whiteManaCount = original.getWhiteManaCount();
+        manaCountCopy.blueManaCount = original.getBlueManaCount();
+        manaCountCopy.greenManaCount = original.getGreenManaCount();
+        manaCountCopy.blackManaCount = original.getBlackManaCount();
+        manaCountCopy.colorlessManaCount = original.getColorlessManaCount();
+
+        return manaCountCopy;
+    }
+
+    public void printMana(){
+        System.out.println(redManaCount);
+        System.out.println(whiteManaCount);
+        System.out.println(blueManaCount);
+        System.out.println(greenManaCount);
+        System.out.println(blackManaCount);
+        System.out.println(colorlessManaCount);
     }
 
     // Implementation

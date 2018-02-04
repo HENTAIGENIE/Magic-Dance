@@ -16,7 +16,9 @@ public class CardView extends VBox{
     // Depending on what zone the card is in a different action button will be visible on the view
 
     public CardView(Card card){
+
         cardImageView = new ImageView(card.getCardImage());
+
     }
 
     public void tap(){

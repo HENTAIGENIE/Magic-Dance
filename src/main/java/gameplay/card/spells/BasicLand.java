@@ -1,6 +1,6 @@
-package gameplay.card.permanent.land;
+package gameplay.card.spells;
 
-import gameplay.card.Card;
+import gameplay.ManaCount;
 import gameplay.card.permanent.Permanent;
 import javafx.scene.image.Image;
 
@@ -32,7 +32,7 @@ public class BasicLand implements Permanent {
     }
 
     @Override
-    public Object getManaCost() {
+    public ManaCount getManaCost() {
         return null;
     }
 
@@ -40,4 +40,7 @@ public class BasicLand implements Permanent {
     public ManaColor getColor() {
         return null;
     }
+
+    @Override
+    public Rarity getRarity(){ return Rarity.COMMON; }
 }

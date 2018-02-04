@@ -1,10 +1,8 @@
-package gameplay.card.permanent.creature;
+package gameplay.card.spells;
 
 import gameplay.ManaCount;
 import gameplay.card.permanent.creature.Creature;
 import javafx.scene.image.Image;
-
-import java.io.File;
 
 public class Batterhorn implements Creature {
 
@@ -32,7 +30,7 @@ public class Batterhorn implements Creature {
 
     @Override
     public void onSummon() {
-
+        //destroy target artifact
     }
 
     @Override
@@ -51,7 +49,7 @@ public class Batterhorn implements Creature {
     }
 
     @Override
-    public Object getManaCost() {
+    public ManaCount getManaCost() {
         return new ManaCount(1,0,0,0,0,4);
     }
 
@@ -59,6 +57,9 @@ public class Batterhorn implements Creature {
     public ManaColor getColor(){
         return ManaColor.RED;
     }
+
+    @Override
+    public Rarity getRarity(){ return Rarity.COMMON; }
 
     //Implementation
 

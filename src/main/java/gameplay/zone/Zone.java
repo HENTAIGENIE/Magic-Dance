@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Zone {
 
-    protected ArrayList<Card> cards = new ArrayList<Card>(0);
+    private ArrayList<Card> cards = new ArrayList<Card>(0);
 
     public ArrayList<Card> getCards() {
         return cards;
@@ -16,12 +16,12 @@ public class Zone {
      * Copies the specified element of this zone's card array to that of another zone and
      * then removes the element from this array
      *
-     * @param indexOfCard index of card to be moved
+     * @param index index of card to be moved
      * @param destination zone the card is to be moved to
      */
-    public void moveCard(int indexOfCard, Zone destination){
-        destination.getCards().add(this.getCards().get(indexOfCard));
-        this.cards.remove(indexOfCard);
+    public void moveCard(int index, Zone destination){
+        destination.getCards().add(this.cards.get(index));
+        this.cards.remove(index);
     }
 
 

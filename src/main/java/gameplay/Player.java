@@ -12,6 +12,7 @@ public class Player {
     // Attributes
     private int life;
     private int poisonCounters;
+    private ManaCount playerMana = new ManaCount();
 
     // Player private zones
     private Library library = new Library();

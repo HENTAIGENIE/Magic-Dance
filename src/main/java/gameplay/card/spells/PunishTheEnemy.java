@@ -1,7 +1,7 @@
-package gameplay.card.ephemeral.instant;
+package gameplay.card.spells;
 
 import gameplay.ManaCount;
-import gameplay.card.Card;
+import gameplay.card.ephemeral.instant.Instant;
 import javafx.scene.image.Image;
 
 public class PunishTheEnemy implements Instant {
@@ -27,7 +27,7 @@ public class PunishTheEnemy implements Instant {
     }
 
     @Override
-    public Object getManaCost() {
+    public ManaCount getManaCost() {
         return new ManaCount(1,0,0,0,0,4);
     }
 
@@ -35,4 +35,7 @@ public class PunishTheEnemy implements Instant {
     public ManaColor getColor() {
         return ManaColor.RED;
     }
+
+    @Override
+    public Rarity getRarity(){ return Rarity.COMMON; }
 }

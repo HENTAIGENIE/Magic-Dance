@@ -1,3 +1,6 @@
+import gameplay.DumbStupidCardLoader;
+import gameplay.GameMode;
+
 public class Main /*extends Application*/{
 
     /*
@@ -32,17 +35,11 @@ public class Main /*extends Application*/{
     */
     public static void main(String[] args){
 
-        int b = 0;
-        System.out.println(b);
-        test(b);
-        System.out.println(b);
+        new DumbStupidCardLoader();
+        new GameMode(GameMode.Mode.STANDARD);
 
 
         //CardClassLoader.loadCards(); <-- Load all cards to array for use
         //Application.launch(args);
-    }
-
-    public static void test (int test){
-        test = 5;
     }
 }
