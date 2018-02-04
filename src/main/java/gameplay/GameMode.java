@@ -1,12 +1,21 @@
 package gameplay;
 
+import gameplay.zone.*;
+
 public class GameMode {
 
+    // Game Modes
     enum Mode {
-
+        STANDARD,
+        TWO_HEADED_GIANT,
     }
 
+    // Player public zone
+    Stack stack = new Stack();
+
     public GameMode(Mode mode){
+
+
 
     }
 
