@@ -9,7 +9,7 @@ public class PrimaryView extends BorderPane {
         //Consider importing FXML here
         this.setCenter(new MainPane());
         this.setLeft(new MainSidebar());
-
+        this.getParent();
     }
 
 }

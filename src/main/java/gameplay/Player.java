@@ -1,10 +1,7 @@
 package gameplay;
 
-import gameplay.card.Card;
 import gameplay.zone.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Player {

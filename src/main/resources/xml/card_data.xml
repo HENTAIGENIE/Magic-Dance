@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<asset-data>
+
+    <card type="creature">
+        <name>Feral Prowler</name>
+        <race>CAT</race>
+        <expantion>HOD</expantion>
+        <color>GREEN</color>
+        <manacost>
+            <green>1</green>
+            <colorless>1</colorless>
+        </manacost>
+        <power>1</power>
+        <toughness>3</toughness>
+        <behavior tag="on-death">
+            <draw>1</draw>
+        </behavior>
+        <image>feralProwler.jpeg</image>
+    </card>
+
+
+    <card type="creature">
+        <name>Liliana's Elite</name>
+        <race>ZOMBIE</race>
+        <expantion>ELM</expantion>
+        <color>BLACK</color>
+        <manacost>
+            <black>1</black>
+            <colorless>2</colorless>
+        </manacost>
+        <power>1</power>
+        <toughness>1</toughness>
+        <behavior tag="on-summon">
+            <counter>
+                <power>1</power>
+                <toughness>1</toughness>
+                <per in="graveyard">creature</per>
+            </counter>
+        </behavior>
+        <image>lilianasElite.jpeg</image>
+    </card>
+
+
+    <card>
+
+    </card>
+
+
+</asset-data>

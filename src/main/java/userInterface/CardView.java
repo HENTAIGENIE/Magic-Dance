@@ -1,7 +1,6 @@
 package userInterface;
 
 import gameplay.card.Card;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -17,7 +16,8 @@ public class CardView extends VBox{
 
     public CardView(Card card){
 
-        cardImageView = new ImageView(card.getCardImage());
+        setCardImageView(card.getCardImage());
+        this.getChildren().add(getCardImageView());
 
     }
 
@@ -26,4 +26,11 @@ public class CardView extends VBox{
         //Send delegate to game thread that this card is tapped
     }
 
+    public void setCardImageView(Image cardImage){
+        cardImageView = new ImageView(cardImage);
+    }
+
+    public ImageView getCardImageView() {
+        return cardImageView;
+    }
 }
