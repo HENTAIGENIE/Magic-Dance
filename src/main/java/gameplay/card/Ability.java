@@ -50,10 +50,10 @@ public class Ability {
         }
     }
 
-
+    // Actions
 
     private void deathTouch(){
-
+        //Maybe make toughness into an absurdly large number
     }
 
     private void defender(){

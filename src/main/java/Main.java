@@ -1,16 +1,9 @@
-import gameplay.GameMode;
-import gameplay.card.Card;
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import userInterface.CardView;
-import userInterface.PrimaryView;
+import gameplay.card.CardLoader;
 
-public class Main extends Application{
+public class Main /* extends Application*/{
 
+
+    /*
 
     public static String IMAGES = "/img/";
     public static String FXML = "/fxml/";
@@ -26,20 +19,20 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage){
 
-        /*
+
         mainMenu = new Scene(new PrimaryView(), 512, 256);
         primaryStage.setTitle("Magic Dance");
         primaryStage.setResizable(true);
         primaryStage.setScene(mainMenu);
         primaryStage.show();
-        */
+
 
         Card testCard = new Card();
         testCard.setCardImage(IMAGES + "/cards/batterhorn.jpeg");
 
         Group root = new Group();
         Scene test = new Scene(root, 512, 512);
-        CardView testView = new CardView(testCard);
+        CardUIObject testView = new CardUIObject(testCard);
         root.getChildren().add(testView);
 
         primaryStage.setTitle("Test");
@@ -53,14 +46,13 @@ public class Main extends Application{
         //Platform.exit() is preferred way to exiting program - allows this method to be run
 
     }
-
+    */
 
     public static void main(String[] args){
 
-
         //GameMode.init();
 
-        //CardClassLoader.loadCards(); <-- Load all cards to array for use
-        Application.launch(args);
+        CardLoader.loadCardAssets(); //<-- Load all cards to array for use
+        //Application.launch(args); //<-- Launch GUI
     }
 }

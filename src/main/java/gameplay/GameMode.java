@@ -16,8 +16,7 @@ public class GameMode {
 
     }
 
-    // Player public zone
-    Stack stack = new Stack();
+    static Stack stack = new Stack();
 
     public static GameMode init(){
 
