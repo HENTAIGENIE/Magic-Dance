@@ -2,7 +2,7 @@ package gameplay.card;
 
 import java.util.ArrayList;
 
-public class Ability {
+public class AbilityManager {
     public enum KeyWord {
         DEATH_TOUCH,
         DEFENDER,
@@ -53,7 +53,7 @@ public class Ability {
     // Actions
 
     private void deathTouch(){
-        //Maybe make toughness into an absurdly large number
+        //Maybe make power into an absurdly large number
     }
 
     private void defender(){

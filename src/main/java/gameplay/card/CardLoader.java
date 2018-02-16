@@ -1,12 +1,11 @@
 package gameplay.card;
 
+import gameplay.ManaCount;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
@@ -20,121 +19,165 @@ public class CardLoader {
     2. Make nodeList of card elements
     3. Depending on the attribute of each card, make a card object of the respective type
     4. Add the object to the loaded cards array
+    5. Return loadedCards array
     5. Boom. Card assets loaded
      */
+
+
 
     // ----------------
     // Public Interface
     // ----------------
 
-    private static ArrayList<Card> loadedCards = new ArrayList<Card>(0); // Loaded cards
-
     /**
-     * @return returns an array list which contains all cards loaded from XML
+     * Builds cards from XML data and compiles them into an array
+     *
+     * @param xmlFile a Card data XML file
+     * @return array of cards built from XML data provided
      */
-    public static ArrayList<Card> getLoadedCards(){
+    public ArrayList<Card> loadCardsFromXML(File xmlFile){
+
+        ArrayList<Card> loadedCards = new ArrayList<Card>(0);
+
+        // DOM Document Node created from xmlFile
+        Document xmlDoc = parseXMLtoDocument(xmlFile);
+
+        // Begin loading data from the xml Document as long as the Document is not null
+        if (xmlDoc != null) {
+
+            // Break the document into Nodes; each Node representing a Card object
+            NodeList cardNodesList = xmlDoc.getElementsByTagName("card");
+            for (int i = 0; i < cardNodesList.getLength(); i++) {
+
+                // For each cardNode, create a Card object and load the Node's data to it
+                Card newCard = cardNodeToCardObject(cardNodesList.item(i));
+                // Append the new Card object to the loaded cards ArrayList
+                loadedCards.add(newCard);
+            }
+        }
+        else {
+            // THROW SOME EXCEPTION THAT INDICATES A FAILED LOAD <------------
+        }
+        // Return fully loaded array
         return loadedCards;
     }
 
-    /**
-     * Load data from XML file to array list of Cards for usage
-     */
-    public static void loadCardAssets(){
+    // --------------
+    // Implementation
+    // --------------
 
-        File cardsXML = new File("src/main/resources/xml/card_data.xml");
-        parseAndLoadXMLData(cardsXML);
-        // Do something if there are no cards to load
+    /* Create DOM Document Node from an XML file passed as a parameter */
+    private Document parseXMLtoDocument(File xmlFile){
 
-    }
-
-    // -------------------------
-    // XML Parser Implementation
-    // -------------------------
-
-    private static void parseAndLoadXMLData(File xmlFile){
+        Document xmlDoc;
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try{
+        try {
 
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document xmlDoc = builder.parse(xmlFile);
-            NodeList cardNodeList = xmlDoc.getElementsByTagName("card");
+            // Create the Document Node from XML file
+            xmlDoc = factory.newDocumentBuilder().parse(xmlFile);
 
-            loadCards(cardNodeList);
+            return xmlDoc;
 
+        } catch (ParserConfigurationException | SAXException | IOException e) {
 
-        } catch (ParserConfigurationException e) {
             e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            return null;
         }
-
 
     }
 
 
-    private static void loadCards(NodeList cardNodeList){
+    /* Create a Card object from the data contained within a rigidly structured "card" Node */
+    private Card cardNodeToCardObject(Node cardNode){
 
-        // For each element in cardNodeList create a Card respective to the element's type attribute
-        for (int i = 0; i < cardNodeList.getLength(); i++){
+        // Create new, empty Card which the XML data will be loaded into
+        Card cardAsset = new Card();
 
-            Element cardTree = (Element) cardNodeList.item(i);
+        // Break the cardNode into "field categories" (Cards are defined in XML with "basic" and "type_specific" fields)
+        NodeList fieldCategoryList = cardNode.getChildNodes();
 
-            if (cardTree.getAttribute("type") == "land") loadedCards.add(buildLand(cardTree));
-            else if (cardTree.getAttribute("type").equals("creature")) loadedCards.add(buildCreature(cardTree));
-            else if (cardTree.getAttribute("type").equals("instant")) loadedCards.add(buildInstant(cardTree));
-            else if (cardTree.getAttribute("type").equals("sorcery")) loadedCards.add(buildSorcery(cardTree));
-            else if (cardTree.getAttribute("type").equals("enchantment")) loadedCards.add(buildEnchantment(cardTree));
-            else if (cardTree.getAttribute("type").equals("artifact")) loadedCards.add(buildArtifact(cardTree));
-            else {
-                System.out.println("Unrecognized attribute: " + cardTree.getAttribute("type"));
+        // Load the fields contained in each category to the cardAsset
+        for (int i = 0; i < fieldCategoryList.getLength(); i++){
+
+            Node categoryNode = fieldCategoryList.item(i);
+            String categoryName = categoryNode.getNodeName();
+
+            // Depending on the categoryNode name run the respective load algorithm
+            if (categoryName.equals("basic")) loadBasicFields(categoryNode, cardAsset);
+            else if (categoryName.equals("type_specific")) loadTypeSpecificFields(categoryNode, cardAsset);
+        }
+
+        return cardAsset;
+    }
+
+
+    // ----- Load Basic Fields
+
+    private void loadBasicFields(Node basicCategoryNode, Card card){
+
+        NodeList basicFieldsList = basicCategoryNode.getChildNodes();
+        for (int i = 0; i < basicFieldsList.getLength(); i++){
+            Node fieldNode = basicFieldsList.item(i);
+
+            String fieldName = fieldNode.getNodeName();
+            if (fieldNode.getNodeType() != Node.TEXT_NODE) {
+                if (fieldName.equals("name")) card.setName(fieldNode.getTextContent());
+                else if (fieldName.equals("image")) card.setImagePath(fieldNode.getTextContent());
+                else if (fieldName.equals("manacost")) card.setManaCost(loadManaCost(fieldNode));
+                else if (fieldName.equals("color")) card.setColor(Card.Color.valueOf(fieldNode.getTextContent()));
+                else if (fieldName.equals("rarity")) card.setRarity(Card.Rarity.valueOf(fieldNode.getTextContent()));
             }
         }
     }
 
-    private static Card buildLand(Element cardTree){
 
-        System.out.println("land");
+    private ManaCount loadManaCost(Node node){
 
-        return null; // Will return a Land card
+        ManaCount manaCost = new ManaCount();
+        NodeList children = node.getChildNodes();
+
+        for (int i = 0; i < children.getLength(); i++){
+            Node childNode = children.item(i);
+            String nodeName = childNode.getNodeName();
+
+            if (childNode.getNodeType() != Node.TEXT_NODE) {
+                int coloredManaCount = Integer.parseInt(childNode.getTextContent());
+
+                if (nodeName.equals("red")) manaCost.setRedManaCount(coloredManaCount);
+                else if (nodeName.equals("white")) manaCost.setWhiteManaCount(coloredManaCount);
+                else if (nodeName.equals("blue")) manaCost.setBlueManaCount(coloredManaCount);
+                else if (nodeName.equals("green")) manaCost.setGreenManaCount(coloredManaCount);
+                else if (nodeName.equals("black")) manaCost.setBlackManaCount(coloredManaCount);
+                else if (nodeName.equals("colorless")) manaCost.setColorlessManaCount(coloredManaCount);
+            }
+        }
+
+        return manaCost;
     }
 
-    private static Card buildCreature(Element cardTree){
 
-        System.out.println("creature");
+    // ----- Load Type Specific Fields
 
-        return null; // Will return a Creature card
+    private void loadTypeSpecificFields(Node typeSpecificCategoryNode, Card card){
+
+        NodeList typeSpecificFieldsList = typeSpecificCategoryNode.getChildNodes();
+        for (int i = 0; i < typeSpecificFieldsList.getLength(); i++){
+            Node fieldNode = typeSpecificFieldsList.item(i);
+
+            String fieldName = fieldNode.getNodeName();
+            if (fieldNode.getNodeType() != Node.TEXT_NODE){
+                if (fieldName.equals("type")){
+                    String type = fieldNode.getTextContent();
+                    card.setCardType(type);
+
+                }
+            }
+        }
     }
 
-    private static Card buildInstant(Element cardTree){
 
-        System.out.println("instant");
-
-        return null; // Will return an Instant card
-    }
-
-    private static Card buildSorcery(Element cardTree){
-
-        System.out.println("sorcery");
-
-        return null; // Will return a Sorcery card
-    }
-
-    private static Card buildEnchantment(Element cardTree){
-
-        System.out.println("enchantment");
-
-        return null; // Will return an Enchantment card
-    }
-
-    private static Card buildArtifact(Element cardTree){
-
-        System.out.println("artifact");
-
-        return null; // Will return an Artifact card
-    }
 
 
 }

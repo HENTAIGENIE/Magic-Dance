@@ -121,7 +121,7 @@ public class ManaCount {
      * @param original ManaCount object to be copied
      * @return returns a copy of the original ManaCount object
      */
-    public ManaCount getCopyOf(ManaCount original){
+    public static ManaCount getCopyOf(ManaCount original){
         ManaCount manaCountCopy = new ManaCount();
 
         manaCountCopy.redManaCount = original.getRedManaCount();
@@ -135,12 +135,12 @@ public class ManaCount {
     }
 
     public void printMana(){
-        System.out.println(redManaCount);
-        System.out.println(whiteManaCount);
-        System.out.println(blueManaCount);
-        System.out.println(greenManaCount);
-        System.out.println(blackManaCount);
-        System.out.println(colorlessManaCount);
+        System.out.printf("Red: %d, ", redManaCount);
+        System.out.printf("White: %d, ", whiteManaCount);
+        System.out.printf("Blue: %d, ", blueManaCount);
+        System.out.printf("Green: %d, ", greenManaCount);
+        System.out.printf("Black: %d, ", blackManaCount);
+        System.out.printf("Colorless: %d, %n", colorlessManaCount);
     }
 
     // Implementation

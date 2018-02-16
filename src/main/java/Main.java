@@ -1,4 +1,8 @@
+import gameplay.card.Card;
 import gameplay.card.CardLoader;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class Main /* extends Application*/{
 
@@ -50,9 +54,26 @@ public class Main /* extends Application*/{
 
     public static void main(String[] args){
 
-        //GameMode.init();
 
-        CardLoader.loadCardAssets(); //<-- Load all cards to array for use
+        // Load cards from XML formatted file
+        ArrayList<Card> cardAssets = new CardLoader().loadCardsFromXML(new File("src/main/resources/xml/card_data.xml"));
+
+        // Test of CardLoader
+        for(Card element: cardAssets){
+            System.out.println("-----------------");
+            System.out.println(element.getName());
+            System.out.println(element.getCardType());
+            System.out.println(element.getImagePath());
+            try { // Resort card array so that error handling is not necessary when calling element.getManaCost().printMana();
+                element.getManaCost().printMana();
+            }catch (Exception e){
+                System.err.println(e.getMessage());
+            }
+            System.out.println(element.getColor());
+            System.out.println(element.getRarity());
+        }
+
         //Application.launch(args); //<-- Launch GUI
+
     }
 }
