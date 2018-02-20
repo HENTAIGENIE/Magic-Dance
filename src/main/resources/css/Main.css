@@ -24,20 +24,24 @@
     -fx-text-fill: white;
 }
 
+.testButton{
+    -fx-padding: 3 3 3 3;
+}
+
+.testButtonText{
+    -fx-text-fill: white;
+    -fx-font-size: 30;
+}
+
 .roundButton{
-    -fx-text-fill: grey;
+    -fx-padding: 0 0 0 0;
+    -fx-text-fill: green;
     -fx-background-radius: 5em;
     -fx-min-width: 60px;
     -fx-min-height: 60px;
     -fx-max-width: 60px;
     -fx-max-height: 60px;
-}
-
-.roundButton .text{
-  -fx-stroke: dimgrey;
-  -fx-fill: dimgrey;
-  -fx-font-size: 20;
-  -fx-translate-y: -1;
+    -fx-font-size: 30;
 }
 
 .hBox{
@@ -46,6 +50,10 @@
 
 .alertText{
     -fx-text-fill: red;
+}
+
+.buttonLayers{
+    -fx-background-color: grey;
 }
 
 

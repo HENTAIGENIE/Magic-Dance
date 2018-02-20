@@ -5,7 +5,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class PrimaryViewController {
@@ -49,8 +53,28 @@ public class PrimaryViewController {
 
     @FXML public void addCard(){
 
-        Button testButton = new Button("Test");
-        testButton.getStyleClass().add("button");
+        scrollPane.setHvalue(1);
+
+        Button testButton = new Button("");
+        testButton.getStyleClass().add("testButton");
+        testButton.setMaxHeight(scrollPane.getHeight() - 9);
+
+        Image buttonImage = new Image(getClass().getResourceAsStream("/img/test.png"));
+        ImageView biView = new ImageView(buttonImage);
+        biView.setFitHeight(testButton.getMaxHeight());
+        biView.setPreserveRatio(true);
+
+        Text buttonText = new Text();
+        buttonText.setText(String.valueOf(contentsOfScrollPane.getChildren().size()));
+        buttonText.getStyleClass().add("testButtonText");
+        buttonText.setFill(Color.WHITE);
+
+        StackPane buttonLayers = new StackPane();
+        buttonLayers.getChildren().addAll(biView, buttonText);
+        buttonLayers.getStyleClass().add("buttonLayers");
+
+        testButton.setGraphic(buttonLayers);
+
         contentsOfScrollPane.getChildren().add(testButton);
 
     }
