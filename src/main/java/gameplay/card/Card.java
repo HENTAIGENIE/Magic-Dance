@@ -1,6 +1,7 @@
 package gameplay.card;
 import gameplay.ManaCount;
 import gameplay.Player;
+import gameplay.card.behavior.Behavior;
 import gameplay.zone.Zone;
 
 public class Card {
@@ -25,23 +26,42 @@ public class Card {
         MASTERPIECE
     }
 
+    public enum Type {
+        CREATURE,
+        INSTANT,
+        ENCHANTMENT,
+        ARTIFACT,
+        SORCERY,
+        LAND,
+    }
+
+    public enum Race {
+        BEAST,
+        ZOMBIE,
+    }
+
     // Basic State Fields
 
     private String name;
-    private String cardType;
+    private Type type;
     private String imagePath;
     private ManaCount manaCost;
     private Color color;
     private Rarity rarity;
+    private Race race;
+    private int power;
+    private int toughness;
 
     // Game-Play State Fields
 
     private Zone currentZone;
     private Player owner;
+    private Behavior behavior;
 
     // ----------------
     // Public Interface
     // ----------------
+
 
     // ----- Accessor
 
@@ -49,8 +69,8 @@ public class Card {
         return name;
     }
 
-    public String getCardType() {
-        return cardType;
+    public Type getType() {
+        return type;
     }
 
     public String getImagePath(){
@@ -65,11 +85,8 @@ public class Card {
         return owner;
     }
 
-    public ManaCount getManaCost() throws Exception{
-        if (this.manaCost != null) return this.manaCost;
-        else {
-            throw new Exception("No ManaCount attached : " + this.name);
-        }
+    public ManaCount getManaCost(){
+        return manaCost;
     }
 
     public Color getColor(){
@@ -80,6 +97,20 @@ public class Card {
         return rarity;
     }
 
+    public Race getRace(){
+        return race;
+    }
+
+    public int getPower(){
+        return power;
+    }
+
+    public int getToughness(){
+        return toughness;
+    }
+
+    public Behavior getBehavior() { return behavior; }
+
 
     // ----- Mutator
 
@@ -87,8 +118,8 @@ public class Card {
         this.name = name;
     }
 
-    public void setCardType(String type) {
-        this.cardType = type;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public void setImagePath(String path){
@@ -114,6 +145,20 @@ public class Card {
     public void setRarity (Rarity rarity){
         this.rarity = rarity;
     }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public void setToughness(int toughness) {
+        this.toughness = toughness;
+    }
+
+    public void setBehavior(Behavior behavior) {this.behavior = behavior; }
 
 
     // ----- Constructors

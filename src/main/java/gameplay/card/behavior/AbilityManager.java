@@ -1,8 +1,9 @@
-package gameplay.card;
+package gameplay.card.behavior;
 
 import java.util.ArrayList;
 
 public class AbilityManager {
+
     public enum KeyWord {
         DEATH_TOUCH,
         DEFENDER,
@@ -50,7 +51,7 @@ public class AbilityManager {
         }
     }
 
-    // Actions
+    // ----- Actions
 
     private void deathTouch(){
         //Maybe make power into an absurdly large number

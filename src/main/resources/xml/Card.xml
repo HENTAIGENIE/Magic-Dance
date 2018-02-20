@@ -1,0 +1,33 @@
+<card_data>
+
+    <card>
+        <name>Liliana's Elite</name>
+        <type>CREATURE</type>
+        <rarity>COMMON</rarity>
+        <expantion>ELDRITCH_MOON</expantion>
+        <color>BLACK</color>
+        <manacost>
+            <black>1</black>
+            <colorless>2</colorless>
+        </manacost>
+        <image>lilianasElite.jpeg</image>
+        <race>ZOMBIE</race>
+        <power>1</power>
+        <toughness>1</toughness>
+    </card>
+
+
+    <card>
+        <name>Batterhorn</name>
+        <type>INSTANT</type>
+        <rarity>COMMON</rarity>
+        <expantion>RETURN_TO_RAVNICA</expantion>
+        <color>RED</color>
+        <manacost>
+            <red>1</red>
+            <colorless>4</colorless>
+        </manacost>
+        <image>batterhorn.jpeg</image>
+    </card>
+
+</card_data>

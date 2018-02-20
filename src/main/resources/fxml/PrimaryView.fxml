@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?language javascript?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" stylesheets="@/css/Main.css" styleClass="mainPane" fx:controller="userInterface.PrimaryViewController"
+          alignment="CENTER" layoutX="300.0" layoutY="50.0" prefHeight="300.0" prefWidth="200.0" hgap="10" vgap="10">
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="10" hgrow="SOMETIMES" halignment="CENTER"/>
+        <ColumnConstraints percentWidth="10" hgrow="SOMETIMES" halignment="CENTER"/>
+        <ColumnConstraints percentWidth="60" hgrow="SOMETIMES" halignment="CENTER"/>
+        <ColumnConstraints percentWidth="10" hgrow="SOMETIMES" halignment="CENTER"/>
+        <ColumnConstraints percentWidth="10" hgrow="SOMETIMES" halignment="CENTER"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints percentHeight="40" vgrow="SOMETIMES" valignment="CENTER"/>
+        <RowConstraints percentHeight="20" vgrow="SOMETIMES" valignment="CENTER"/>
+    </rowConstraints>
+
+
+    <children>
+
+        <HBox styleClass="hBox" GridPane.columnIndex="2" GridPane.rowIndex="0" alignment="CENTER">
+            <Button text="Big Boy" styleClass="button" />
+            <Text fx:id="alert" styleClass="alertText"/>
+        </HBox>
+
+        <Button text="&lt;" styleClass="roundButton" GridPane.columnIndex="1" GridPane.rowIndex="1" onMouseClicked="#panLeft" />
+        <Button text="&gt;" styleClass="roundButton" GridPane.columnIndex="3" GridPane.rowIndex="1" onMouseClicked="#panRight" />
+
+        <ScrollPane fx:id="scrollPane" styleClass="scrollPane" GridPane.columnIndex="2" GridPane.rowIndex="1" vbarPolicy="NEVER" hbarPolicy="NEVER">
+            <HBox fx:id="contentsOfScrollPane" styleClass="hBox" alignment="CENTER">
+                <Button text="Test" styleClass="button" />
+                <Button text="Test" styleClass="button" />
+                <Button text="Test" styleClass="button" />
+                <Button text="Test" styleClass="button" />
+                <Button text="Test" styleClass="button" />
+
+                <Button text="Test" styleClass="button" />
+                <Button text="Test" styleClass="button" />
+                <Button text="Test" styleClass="button" />
+                <Button text="Test" styleClass="button" />
+                <Button text="Test" styleClass="button" />
+            </HBox>
+        </ScrollPane>
+    </children>
+
+</GridPane>

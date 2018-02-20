@@ -1,15 +1,22 @@
 package userInterface;
 
-import javafx.scene.layout.BorderPane;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
-public class PrimaryView extends BorderPane {
+public class PrimaryView extends StackPane {
 
-    public PrimaryView(){
+    public PrimaryView() throws Exception{
 
-        //Consider importing FXML here
-        this.setCenter(new MainPane());
-        this.setLeft(new MainSidebar());
-        this.getParent();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/PrimaryView.fxml"));
+        getChildren().add(root);
+
     }
+
 
 }

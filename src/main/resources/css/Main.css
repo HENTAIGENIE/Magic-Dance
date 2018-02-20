@@ -1,0 +1,52 @@
+
+/* Main CSS */
+
+.mainPane{
+    -fx-background-color : white;
+}
+
+.button{
+    -fx-background-color: green, white;
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 50 30 50 30;
+    -fx-text-fill: green;
+    -fx-font-size: 14px;
+}
+
+.button:hover{
+    -fx-background-color: blue, white;
+    -fx-text-fill: blue;
+}
+
+.button:pressed{
+    -fx-background-color: white, dimgrey;
+    -fx-text-fill: white;
+}
+
+.roundButton{
+    -fx-text-fill: grey;
+    -fx-background-radius: 5em;
+    -fx-min-width: 60px;
+    -fx-min-height: 60px;
+    -fx-max-width: 60px;
+    -fx-max-height: 60px;
+}
+
+.roundButton .text{
+  -fx-stroke: dimgrey;
+  -fx-fill: dimgrey;
+  -fx-font-size: 20;
+  -fx-translate-y: -1;
+}
+
+.hBox{
+    -fx-background-color: grey;
+}
+
+.alertText{
+    -fx-text-fill: red;
+}
+
+
+

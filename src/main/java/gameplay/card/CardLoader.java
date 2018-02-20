@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
@@ -23,8 +24,6 @@ public class CardLoader {
     5. Boom. Card assets loaded
      */
 
-
-
     // ----------------
     // Public Interface
     // ----------------
@@ -39,7 +38,6 @@ public class CardLoader {
 
         ArrayList<Card> loadedCards = new ArrayList<Card>(0);
 
-        // DOM Document Node created from xmlFile
         Document xmlDoc = parseXMLtoDocument(xmlFile);
 
         // Begin loading data from the xml Document as long as the Document is not null
@@ -49,16 +47,14 @@ public class CardLoader {
             NodeList cardNodesList = xmlDoc.getElementsByTagName("card");
             for (int i = 0; i < cardNodesList.getLength(); i++) {
 
-                // For each cardNode, create a Card object and load the Node's data to it
+                // For each cardNode, create a Card object, load the Node's data to it, and append card to loadedCards
                 Card newCard = cardNodeToCardObject(cardNodesList.item(i));
-                // Append the new Card object to the loaded cards ArrayList
                 loadedCards.add(newCard);
             }
         }
         else {
-            // THROW SOME EXCEPTION THAT INDICATES A FAILED LOAD <------------
+            // THROW SOME EXCEPTION THAT INDICATES A FAILED LOAD
         }
-        // Return fully loaded array
         return loadedCards;
     }
 
@@ -66,16 +62,19 @@ public class CardLoader {
     // Implementation
     // --------------
 
-    /* Create DOM Document Node from an XML file passed as a parameter */
+    /* Create DOM Document Node from an XML file  */
     private Document parseXMLtoDocument(File xmlFile){
 
         Document xmlDoc;
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
 
-            // Create the Document Node from XML file
-            xmlDoc = factory.newDocumentBuilder().parse(xmlFile);
+            //IMPLEMENT VALIDATION WITH XSD - LEARN THE SHIT OUT OF XML
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            xmlDoc = builder.parse(xmlFile);
 
             return xmlDoc;
 
@@ -96,17 +95,16 @@ public class CardLoader {
         Card cardAsset = new Card();
 
         // Break the cardNode into "field categories" (Cards are defined in XML with "basic" and "type_specific" fields)
-        NodeList fieldCategoryList = cardNode.getChildNodes();
+        NodeList fieldList = cardNode.getChildNodes();
 
         // Load the fields contained in each category to the cardAsset
-        for (int i = 0; i < fieldCategoryList.getLength(); i++){
+        for (int i = 0; i < fieldList.getLength(); i++){
 
-            Node categoryNode = fieldCategoryList.item(i);
-            String categoryName = categoryNode.getNodeName();
+            Node fieldNode = fieldList.item(i);
+            String categoryName = fieldNode.getNodeName();
 
-            // Depending on the categoryNode name run the respective load algorithm
-            if (categoryName.equals("basic")) loadBasicFields(categoryNode, cardAsset);
-            else if (categoryName.equals("type_specific")) loadTypeSpecificFields(categoryNode, cardAsset);
+            loadBasicFields(fieldNode, cardAsset);
+
         }
 
         return cardAsset;
@@ -115,11 +113,10 @@ public class CardLoader {
 
     // ----- Load Basic Fields
 
-    private void loadBasicFields(Node basicCategoryNode, Card card){
+    /* Load the fields encapsulated in the "basic" Node to the cardAsset
+    * The fields in this category are consistent across all cards */
+    private void loadBasicFields(Node fieldNode, Card card){
 
-        NodeList basicFieldsList = basicCategoryNode.getChildNodes();
-        for (int i = 0; i < basicFieldsList.getLength(); i++){
-            Node fieldNode = basicFieldsList.item(i);
 
             String fieldName = fieldNode.getNodeName();
             if (fieldNode.getNodeType() != Node.TEXT_NODE) {
@@ -128,56 +125,43 @@ public class CardLoader {
                 else if (fieldName.equals("manacost")) card.setManaCost(loadManaCost(fieldNode));
                 else if (fieldName.equals("color")) card.setColor(Card.Color.valueOf(fieldNode.getTextContent()));
                 else if (fieldName.equals("rarity")) card.setRarity(Card.Rarity.valueOf(fieldNode.getTextContent()));
+                else if (fieldName.equals("type")) card.setType(Card.Type.valueOf(fieldNode.getTextContent()));
+                else if (fieldName.equals("race")) card.setRace(Card.Race.valueOf(fieldNode.getTextContent()));
+                else if (fieldName.equals("power")) card.setPower(Integer.parseInt(fieldNode.getTextContent()));
+                else if (fieldName.equals("toughness")) card.setToughness(Integer.parseInt(fieldNode.getTextContent()));
             }
-        }
+
     }
 
-
+    /* Create a new ManaCount and load the respective fields */
     private ManaCount loadManaCost(Node node){
 
         ManaCount manaCost = new ManaCount();
-        NodeList children = node.getChildNodes();
 
-        for (int i = 0; i < children.getLength(); i++){
-            Node childNode = children.item(i);
-            String nodeName = childNode.getNodeName();
+        // Break "manacount" node into color-component Nodes
+        NodeList colorComponentsNodeList = node.getChildNodes();
 
-            if (childNode.getNodeType() != Node.TEXT_NODE) {
-                int coloredManaCount = Integer.parseInt(childNode.getTextContent());
+        // Add the present color-component values to the manaCost
+        for (int i = 0; i < colorComponentsNodeList.getLength(); i++){
+            Node colorComponent = colorComponentsNodeList.item(i);
+            String nodeName = colorComponent.getNodeName();
 
+            if (colorComponent.getNodeType() != Node.TEXT_NODE) {
+                // Parse textContent of color-component Node to integer value
+                int coloredManaCount = Integer.parseInt(colorComponent.getTextContent());
+
+                // Depending on color-component nodeName, set respective [color]manaCount to value of coloredManaCount
                 if (nodeName.equals("red")) manaCost.setRedManaCount(coloredManaCount);
                 else if (nodeName.equals("white")) manaCost.setWhiteManaCount(coloredManaCount);
                 else if (nodeName.equals("blue")) manaCost.setBlueManaCount(coloredManaCount);
                 else if (nodeName.equals("green")) manaCost.setGreenManaCount(coloredManaCount);
                 else if (nodeName.equals("black")) manaCost.setBlackManaCount(coloredManaCount);
                 else if (nodeName.equals("colorless")) manaCost.setColorlessManaCount(coloredManaCount);
+
             }
         }
 
         return manaCost;
     }
-
-
-    // ----- Load Type Specific Fields
-
-    private void loadTypeSpecificFields(Node typeSpecificCategoryNode, Card card){
-
-        NodeList typeSpecificFieldsList = typeSpecificCategoryNode.getChildNodes();
-        for (int i = 0; i < typeSpecificFieldsList.getLength(); i++){
-            Node fieldNode = typeSpecificFieldsList.item(i);
-
-            String fieldName = fieldNode.getNodeName();
-            if (fieldNode.getNodeType() != Node.TEXT_NODE){
-                if (fieldName.equals("type")){
-                    String type = fieldNode.getTextContent();
-                    card.setCardType(type);
-
-                }
-            }
-        }
-    }
-
-
-
 
 }
