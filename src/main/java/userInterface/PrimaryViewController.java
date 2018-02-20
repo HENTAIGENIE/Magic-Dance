@@ -11,13 +11,12 @@ import javafx.scene.text.Text;
 public class PrimaryViewController {
 
     @FXML Text alert;
+    @FXML ScrollPane scrollPane;
+    @FXML HBox contentsOfScrollPane;
 
     // ------------------------
     // Scrolling Implementation
     // ------------------------
-
-    @FXML ScrollPane scrollPane;
-    @FXML HBox contentsOfScrollPane;
 
     // Distance (in "average-node-widths") to scroll
     Double nodesToScrollBy = 3.0;
@@ -42,6 +41,18 @@ public class PrimaryViewController {
 
         // Scroll the scroll pane RIGHT by a percent proportional to the average width of [nodesToScrollBy] nodes
         scrollPane.setHvalue(hValue + ((1/numberOfNodesInContentsOfScrollPane) * nodesToScrollBy));
+    }
+
+    // ----------------------------
+    // Add Card Test Implementation
+    // ----------------------------
+
+    @FXML public void addCard(){
+
+        Button testButton = new Button("Test");
+        testButton.getStyleClass().add("button");
+        contentsOfScrollPane.getChildren().add(testButton);
+
     }
 
 }

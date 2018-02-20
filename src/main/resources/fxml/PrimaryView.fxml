@@ -29,7 +29,7 @@
     <children>
 
         <HBox styleClass="hBox" GridPane.columnIndex="2" GridPane.rowIndex="0" alignment="CENTER">
-            <Button text="Big Boy" styleClass="button" />
+            <Button text="Add Card Test" styleClass="button" onMouseClicked="#addCard"/>
             <Text fx:id="alert" styleClass="alertText"/>
         </HBox>
 
@@ -38,17 +38,7 @@
 
         <ScrollPane fx:id="scrollPane" styleClass="scrollPane" GridPane.columnIndex="2" GridPane.rowIndex="1" vbarPolicy="NEVER" hbarPolicy="NEVER">
             <HBox fx:id="contentsOfScrollPane" styleClass="hBox" alignment="CENTER">
-                <Button text="Test" styleClass="button" />
-                <Button text="Test" styleClass="button" />
-                <Button text="Test" styleClass="button" />
-                <Button text="Test" styleClass="button" />
-                <Button text="Test" styleClass="button" />
 
-                <Button text="Test" styleClass="button" />
-                <Button text="Test" styleClass="button" />
-                <Button text="Test" styleClass="button" />
-                <Button text="Test" styleClass="button" />
-                <Button text="Test" styleClass="button" />
             </HBox>
         </ScrollPane>
     </children>
